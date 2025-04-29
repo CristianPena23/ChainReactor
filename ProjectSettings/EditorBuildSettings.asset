@@ -11,6 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Ranking.unity
+    guid: 0afe6dffc9c009644a5d6b86a4551389
+  - enabled: 1
+    path: Assets/Scenes/Inicio.unity
+    guid: 68d17db51148a884587c9e9097ba7137
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: c801058da67d4f941b0b371f4ed3915d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
