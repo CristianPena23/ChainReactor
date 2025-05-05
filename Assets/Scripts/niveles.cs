@@ -8,9 +8,9 @@ public class niveles : MonoBehaviour
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void Salir()
+    public void Back()
     {
-        Debug.Log("Salir");
-        Application.Quit();
+        SceneManager.LoadScene("Scenes/Inicio");
+        Debug.Log("Ir a Menu-Inicio");
     }
 }
