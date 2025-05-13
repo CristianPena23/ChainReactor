@@ -17,8 +17,8 @@ public class BotonesInicio : MonoBehaviour
     }
     public void jugar()
     {
-        SceneManager.LoadScene("Scenes/Niveles");
-        Debug.Log("Ir a Niveles");
+        SceneManager.LoadScene("Scenes/Instrucciones");
+        Debug.Log("Intro Manual de instrucciones");
     }
 
     public void Salir()
