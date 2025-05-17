@@ -8,8 +8,8 @@ public class OPCIONBUTTON : MonoBehaviour
 {
     private Button m_button = null;
     private Image m_Image = null;
+    private Text m_text = null;
     private Color m_originalColor = Color.black;
-    private Text m_text = null; // <- Corregido aquí
 
     public opcion opcion { get; set; }
 
@@ -17,18 +17,20 @@ public class OPCIONBUTTON : MonoBehaviour
     {
         m_button = GetComponent<Button>();
         m_Image = GetComponent<Image>();
-        m_text = transform.GetChild(0).GetComponent<Text>(); // <- Corregido aquí
+        m_text = transform.GetChild(0).GetComponent<Text>();
         m_originalColor = m_Image.color;
     }
 
     public void Construct(opcion opcion, Action<OPCIONBUTTON> callback)
     {
+        this.opcion = opcion;
         m_text.text = opcion.text;
+
+        m_button.onClick.RemoveAllListeners(); // 🔥 ¡Clave para evitar duplicados!
         m_button.enabled = true;
         m_Image.color = m_originalColor;
-        this.opcion = opcion;
-        m_button.onClick.AddListener(delegate
-        {
+
+        m_button.onClick.AddListener(delegate {
             callback(this);
         });
     }

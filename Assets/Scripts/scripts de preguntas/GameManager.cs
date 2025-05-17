@@ -15,10 +15,14 @@ public class GAMEMANAGER : MonoBehaviour
     private QUIZ_UI m_quizUI = null;
     private AudioSource m_audioSource = null;
 
+    // NUEVO: contador de preguntas
+    private int m_preguntasRespondidas = 0;
+    [SerializeField] private int m_totalPreguntas = 10;
+
     private void Start()
     {
-        m_quizbase = FindFirstObjectByType<BASEDEDATOS>(); // ← método actualizado
-        m_quizUI = FindFirstObjectByType<QUIZ_UI>();       // ← método actualizado
+        m_quizbase = FindFirstObjectByType<BASEDEDATOS>();
+        m_quizUI = FindFirstObjectByType<QUIZ_UI>();
         m_audioSource = GetComponent<AudioSource>();
 
         NextQuestion();
@@ -45,6 +49,18 @@ public class GAMEMANAGER : MonoBehaviour
 
         yield return new WaitForSeconds(m_waitTime);
 
+        // Incrementa el contador
+        m_preguntasRespondidas++;
+
+        // Verifica si ya se completaron todas las preguntas
+        if (m_preguntasRespondidas >= m_totalPreguntas)
+        {
+            Debug.Log("✅ Fin del juego - se respondieron todas las preguntas.");
+            // Aquí puedes mostrar un panel, reiniciar o cargar otra escena
+            yield break;
+        }
+
+        // Si no, sigue con la siguiente
         NextQuestion();
     }
 }

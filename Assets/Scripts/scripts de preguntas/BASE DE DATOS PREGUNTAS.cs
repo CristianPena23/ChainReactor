@@ -9,7 +9,8 @@ public class BASEDEDATOS : MonoBehaviour
 
     private void Awake()
     {
-        m_backup = m_preguntaslist;
+        // Copia real de la lista original
+        m_backup = new List<pregun>(m_preguntaslist);
     }
 
     public pregun GetRandom(bool remove = true)
@@ -29,6 +30,7 @@ public class BASEDEDATOS : MonoBehaviour
 
     private void RestoreBackup()
     {
-        m_preguntaslist = m_backup;
+        // Restaura la lista original desde el respaldo
+        m_preguntaslist = new List<pregun>(m_backup);
     }
 }
