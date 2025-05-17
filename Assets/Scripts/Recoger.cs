@@ -5,22 +5,21 @@ public class Recoger : MonoBehaviour
     public GameObject ObjectToPickUp;
     public GameObject PickedObject;
     public Transform interactionZone;
-    public EnlaceSecuencialManager enlaceSecuencialManager;
 
     void Update()
     {
         // Lógica para recoger objetos
         if (ObjectToPickUp != null && ObjectToPickUp.GetComponent<Monemero>().isPickable == true && PickedObject == null)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.F))
             {
                 PickUpObject();
             }
         }
         // Lógica para soltar/enlazar objetos
-        else if (PickedObject != null)
+        else if(PickedObject != null)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 // Primero intenta enlazar el objeto
                 if (!TryBondObject())
@@ -50,25 +49,28 @@ public class Recoger : MonoBehaviour
         MonomeroEnlace enlace = PickedObject.GetComponent<MonomeroEnlace>();
         if (enlace == null) return false;
 
-        // Validar el orden correcto
-        enlaceSecuencialManager.IntentarEnlace(PickedObject);
-
-        // Luego intentamos enlazar visualmente
         enlace.EnlazarAlJugador(player.transform);
 
-        if (PickedObject.transform.IsChildOf(player.transform))
+        if (PickedObject.transform.parent == player.transform)
         {
             PickedObject = null;
+
+            // 🎯 Generar enlaces visuales después de cada unión
+            Object.FindFirstObjectByType<BondManagerCilindro>()?.GenerateAllBondCylinders();
+
+
+
             return true;
         }
 
         return false;
-    }
+    }   
+
 
     void DropObject()
     {
         PickedObject.GetComponent<Monemero>().isPickable = true;
-        PickedObject.transform.SetParent(null);
+        PickedObject.transform.SetParent(null); 
         PickedObject.GetComponent<Rigidbody>().useGravity = true;
         PickedObject.GetComponent<Rigidbody>().isKinematic = false;
         PickedObject = null;
