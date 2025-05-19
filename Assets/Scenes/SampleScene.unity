@@ -3042,7 +3042,7 @@ GameObject:
   - component: {fileID: 446251687}
   m_Layer: 0
   m_Name: Carbono
-  m_TagString: Untagged
+  m_TagString: Carbono
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3109,7 +3109,7 @@ MonoBehaviour:
   targetTag: Player
   isCarbon: 1
   canFormDoubleBond: 1
-  maxBonds: 4
+  maxBonds: 2
 --- !u!114 &446251687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3163,7 +3163,7 @@ GameObject:
   - component: {fileID: 493302574}
   m_Layer: 0
   m_Name: Hidrogeno2
-  m_TagString: Untagged
+  m_TagString: Hidrogeno
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4223,7 +4223,7 @@ GameObject:
   - component: {fileID: 1013344731}
   m_Layer: 0
   m_Name: Hidrogeno1
-  m_TagString: Untagged
+  m_TagString: Hidrogeno
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5650,7 +5650,7 @@ GameObject:
   - component: {fileID: 1797298280}
   m_Layer: 0
   m_Name: Hidrogeno3
-  m_TagString: Untagged
+  m_TagString: Hidrogeno
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6966,7 +6966,7 @@ GameObject:
   - component: {fileID: 2508039539930180438}
   m_Layer: 0
   m_Name: Hidrogeno4
-  m_TagString: Untagged
+  m_TagString: Hidrogeno
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

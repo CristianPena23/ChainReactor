@@ -16,6 +16,13 @@ public class MonomeroEnlace : MonoBehaviour
 
     void EstablishBond(LinkPoint punto, Transform player)
     {
+        // Protege contra referencias nulas
+        if (bondPoint == null)
+        {
+            Debug.LogWarning("❌ bondPoint no asignado en " + name);
+            return;
+        }
+
         // Ajuste de posición y rotación
         Vector3 offset = bondPoint.position - transform.position;
         transform.position = punto.transform.position - offset;
@@ -28,7 +35,7 @@ public class MonomeroEnlace : MonoBehaviour
         }
 
         // Parenting y física
-        transform.SetParent(player);
+        transform.SetParent(player); // ✅ solo se mueve el monómero, no el player
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -45,7 +52,11 @@ public class MonomeroEnlace : MonoBehaviour
 
         foreach (LinkPoint lp in GetComponentsInChildren<LinkPoint>())
         {
-            if (!lp.isOccupied && lp.isCarbonBond == this.isCarbon && !lp.isDoubleBond)
+            Debug.Log("🔍 Evaluando LP en " + name + ": ocupado=" + lp.isOccupied + ", carbon=" + lp.isCarbonBond + ", doble=" + lp.isDoubleBond);
+
+            if (!lp.isOccupied &&
+                lp.isCarbonBond == this.isCarbon &&
+                lp.isDoubleBond == punto.isDoubleBond)
             {
                 float dist = Vector3.Distance(lp.transform.position, punto.transform.position);
                 if (dist < minDist)
