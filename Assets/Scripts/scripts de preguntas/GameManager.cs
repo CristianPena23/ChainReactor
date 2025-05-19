@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class GAMEMANAGER : MonoBehaviour
@@ -15,9 +16,10 @@ public class GAMEMANAGER : MonoBehaviour
     private QUIZ_UI m_quizUI = null;
     private AudioSource m_audioSource = null;
 
-    // NUEVO: contador de preguntas
     private int m_preguntasRespondidas = 0;
     [SerializeField] private int m_totalPreguntas = 10;
+
+    private int m_puntaje = 0;
 
     private void Start()
     {
@@ -47,20 +49,34 @@ public class GAMEMANAGER : MonoBehaviour
         boton.SetColor(boton.opcion.correct ? m_correctColor : m_incorrectoColor);
         m_audioSource.Play();
 
+        // 🎯 Aumenta o disminuye el puntaje según la respuesta
+        if (boton.opcion.correct)
+        {
+            m_puntaje += 200;
+            Debug.Log("✅ Respuesta correcta. Puntaje actual: " + m_puntaje);
+        }
+        else
+        {
+            m_puntaje -= 100;
+            if (m_puntaje < 0) m_puntaje = 0; // 🛡️ No dejes que baje de 0
+            Debug.Log("❌ Respuesta incorrecta. Puntaje actual: " + m_puntaje);
+        }
+
         yield return new WaitForSeconds(m_waitTime);
 
-        // Incrementa el contador
         m_preguntasRespondidas++;
 
-        // Verifica si ya se completaron todas las preguntas
         if (m_preguntasRespondidas >= m_totalPreguntas)
         {
-            Debug.Log("✅ Fin del juego - se respondieron todas las preguntas.");
-            // Aquí puedes mostrar un panel, reiniciar o cargar otra escena
+            Debug.Log("🎉 Fin del juego - Puntaje final: " + m_puntaje);
+
+            PlayerPrefs.SetInt("PuntajeFinal", m_puntaje);
+            PlayerPrefs.Save();
+
+            SceneManager.LoadScene("Ranking");
             yield break;
         }
 
-        // Si no, sigue con la siguiente
         NextQuestion();
     }
 }
