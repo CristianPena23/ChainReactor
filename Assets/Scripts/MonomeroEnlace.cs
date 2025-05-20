@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+// Usar posiciones relativas, que los monomeros externos esten en posiciones exactas, y que el player valide el angulo de enlace. y que se creen 
+//validadores de enlace para aumentar puntos correctamente y sumar en el rankig
 public class MonomeroEnlace : MonoBehaviour
 {
     [Header("Configuración de Enlace")]
@@ -19,7 +20,7 @@ public class MonomeroEnlace : MonoBehaviour
         // Protege contra referencias nulas
         if (bondPoint == null)
         {
-            Debug.LogWarning("❌ bondPoint no asignado en " + name);
+            Debug.LogWarning("bondPoint no asignado en " + name);
             return;
         }
 
@@ -75,11 +76,11 @@ public class MonomeroEnlace : MonoBehaviour
             punto.linkedTo = myPoint;
             myPoint.linkedTo = punto;
 
-            Debug.Log("✅ Enlace creado entre " + punto.name + " y " + myPoint.name);
+            Debug.Log("Enlace creado entre " + punto.name + " y " + myPoint.name);
         }
         else
         {
-            Debug.LogWarning("❌ No se encontró un LinkPoint válido en este monómero para conectar con " + punto.name);
+            Debug.LogWarning("No se encontró un LinkPoint válido en este monómero para conectar con " + punto.name);
         }
 
         linkedPoint = punto.transform;
@@ -92,8 +93,8 @@ public class MonomeroEnlace : MonoBehaviour
 
         foreach (LinkPoint punto in puntos)
         {
-            bool bondValid = (!punto.isOccupied) && 
-                             (punto.isCarbonBond == this.isCarbon) && 
+            bool bondValid = (!punto.isOccupied) &&
+                             (punto.isCarbonBond == this.isCarbon) &&
                              (!punto.isDoubleBond || this.canFormDoubleBond);
 
             if (bondValid && bondsFormed < maxBonds)
