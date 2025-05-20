@@ -801,8 +801,8 @@ MonoBehaviour:
   instrucciones:
   - {fileID: 21300000, guid: 4f5d5a1b13c807d408a440067d5f8155, type: 3}
   - {fileID: 21300000, guid: 5224aa9fec1fd3e43aad2bfc38f139d6, type: 3}
-  - {fileID: 21300000, guid: a4255d66756f8d044966f80a4d01c2b2, type: 3}
-  - {fileID: 21300000, guid: 5224aa9fec1fd3e43aad2bfc38f139d6, type: 3}
+  - {fileID: 21300000, guid: 14c6aa117c909104980470d1a10d3a3f, type: 3}
+  - {fileID: 21300000, guid: 69c595efba560db408154db3b564448b, type: 3}
   contenidoInstruccion: {fileID: 1344596051}
   botonAnterior: {fileID: 328696865}
   botonSiguiente: {fileID: 1307706506}
