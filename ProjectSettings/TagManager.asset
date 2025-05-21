@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Carbono
-  - Hidrogeno
+  - Hidrogeno1
+  - Hidrogeno2
+  - Hidrogeno3
+  - Hidrogeno4
   layers:
   - Default
   - TransparentFX
