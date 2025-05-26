@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class BASEDEDATOS : MonoBehaviour
 {
@@ -32,5 +33,11 @@ public class BASEDEDATOS : MonoBehaviour
     {
         // Restaura la lista original desde el respaldo
         m_preguntaslist = new List<pregun>(m_backup);
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene("Scenes/SampleScene");
+        Debug.Log("Ir a Menu-Inicio");
     }
 }
