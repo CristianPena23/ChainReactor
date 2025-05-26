@@ -1008,6 +1008,7 @@ MonoBehaviour:
   camaraNormal: {fileID: 682477075}
   camaraFinal: {fileID: 327435670}
   panelFinal: {fileID: 1566104857}
+  materialTransparenteURP: {fileID: 0}
 --- !u!4 &334445980
 Transform:
   m_ObjectHideFlags: 0
@@ -1409,6 +1410,7 @@ MonoBehaviour:
   camaraNormal: {fileID: 0}
   camaraFinal: {fileID: 0}
   panelFinal: {fileID: 0}
+  materialTransparenteURP: {fileID: 2100000, guid: f4a68ee0fd812de49a2da794de37027f, type: 2}
 --- !u!114 &446505201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,14 +1896,14 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -1916,7 +1918,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1946,9 +1948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d073f4842fab645bed198adb53c707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 1, z: 4}
-  lerpValue: 1
-  sensibilidad: 2
+  target: {fileID: 446505198}
+  offset: {x: 0, y: 2, z: 2.5}
+  followSpeed: 5
+  rotateSpeed: 100
 --- !u!114 &682477077
 MonoBehaviour:
   m_ObjectHideFlags: 0
