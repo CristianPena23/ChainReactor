@@ -1,19 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class BotonesSettings : MonoBehaviour
 {
-    public void Home()
+    [SerializeField] private float delayAntesDeCambiar = 0.5f;
+    private AudioSource audioSource;
+
+    private void Awake()
     {
-        SceneManager.LoadScene("Scenes/Inicio");
-        Debug.Log("Ir a Menu-Inicio");
+        audioSource = GetComponent<AudioSource>();
     }
 
-    public void Back()
+    public void Home()
     {
-        SceneManager.LoadScene("Scenes/Inicio");
-        Debug.Log("Ir a Menu-Inicio");
+        StartCoroutine(ReproducirSonidoYEscena("Inicio")); // 👈 Tu escena debe llamarse exactamente así
+    }
+
+    private IEnumerator ReproducirSonidoYEscena(string nombreEscena)
+    {
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ No hay AudioClip asignado.");
+        }
+
+        yield return new WaitForSeconds(delayAntesDeCambiar);
+        SceneManager.LoadScene(nombreEscena);
     }
 }
