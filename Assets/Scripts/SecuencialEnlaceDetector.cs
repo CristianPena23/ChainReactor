@@ -17,6 +17,7 @@ public class SecuencialEnlaceDetector : MonoBehaviour
     public Camera camaraNormal;
     public Camera camaraFinal;
     public GameObject panelFinal;
+    public Material materialTransparenteURP;
 
     private int pasoActual = 0;
 
@@ -60,6 +61,7 @@ public class SecuencialEnlaceDetector : MonoBehaviour
                         // Fijar y pasar al siguiente
                         c.transform.SetParent(paso.puntoDeEnlace);
                         c.transform.position = paso.puntoDeEnlace.position;
+                        VolverTransparente(c.gameObject);
                         pasoActual++;
 
                         if (pasoActual >= pasos.Length)
@@ -70,7 +72,7 @@ public class SecuencialEnlaceDetector : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogWarning("\u274C Ángulo incorrecto con " + c.name + " (" + angulo.ToString("F1") + "°)");
+                        Debug.LogWarning("\u274C \u00c1ngulo incorrecto con " + c.name + " (" + angulo.ToString("F1") + "°)");
                     }
                 }
             }
@@ -84,5 +86,40 @@ public class SecuencialEnlaceDetector : MonoBehaviour
         if (panelFinal != null) panelFinal.SetActive(true);
 
         Debug.Log("\ud83c\udf89 Nivel completado");
+    }
+
+    void VolverTransparente(GameObject objeto)
+    {
+        Renderer rend = objeto.GetComponentInChildren<Renderer>();
+        if (rend != null)
+        {
+            if (materialTransparenteURP != null)
+            {
+                Material mat = new Material(materialTransparenteURP);
+                Color c = mat.color;
+                c.a = 0.4f;
+                mat.color = c;
+                rend.material = mat;
+            }
+            else
+            {
+                Material mat = new Material(rend.material);
+                mat.SetFloat("_Surface", 1);
+                mat.SetFloat("_AlphaClip", 0);
+                mat.SetFloat("_Blend", 0);
+                mat.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                mat.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                mat.SetFloat("_ZWrite", 0);
+                mat.DisableKeyword("_ALPHATEST_ON");
+                mat.EnableKeyword("_ALPHABLEND_ON");
+                mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+
+                Color c = mat.color;
+                c.a = 0.4f;
+                mat.color = c;
+                rend.material = mat;
+            }
+        }
     }
 }

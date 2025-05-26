@@ -2,37 +2,26 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Vector3 offset = new Vector3(0, 2, -5);
-    [Range(0, 1)] public float lerpValue = 0.1f;
-    public float sensibilidad = 2f;
+    public Transform target;                           // El jugador (asigna en Inspector)
+    public Vector3 offset = new Vector3(0f, 5f, -7f);   // Altura y distancia de la cámara
+    public float followSpeed = 5f;                      // Suavidad del seguimiento
+    public float rotateSpeed = 100f;                    // Velocidad de rotación horizontal
 
-    private Transform target;
+    private float yaw = 0f; // Ángulo de rotación en el eje Y
 
-    void Start()
+    void LateUpdate()
     {
-        GameObject playerObject = GameObject.FindWithTag("Player");
+        // 1. Rotar con el mouse en horizontal
+        yaw += Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime;
 
-        if (playerObject != null)
-        {
-            target = playerObject.transform;
-        }
-        else
-        {
-            Debug.LogError("❌ No se encontró un objeto con el tag 'Player'. Asegúrate de que el Player tenga el tag asignado.");
-        }
-    }
+        // 2. Calcular la rotación y posición deseada
+        Quaternion rotation = Quaternion.Euler(0f, yaw, 0f);
+        Vector3 desiredPosition = target.position + rotation * offset;
 
-    void Update()
-    {
-        if (target == null) return;
+        // 3. Mover la cámara suavemente a esa posición
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
 
-        // Movimiento de cámara con interpolación
-        transform.position = Vector3.Lerp(transform.position, target.position + offset, lerpValue);
-
-        // Rotación del offset con el mouse
-        offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * sensibilidad, Vector3.up) * offset;
-
-        // La cámara mira al jugador
-        transform.LookAt(target);
+        // 4. Hacer que mire al centro del jugador (puedes ajustar el up para apuntar más bajo o alto)
+        transform.LookAt(target.position + Vector3.up * 1f);
     }
 }
