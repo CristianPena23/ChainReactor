@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class GAMEMANAGER : MonoBehaviour
@@ -12,12 +12,14 @@ public class GAMEMANAGER : MonoBehaviour
     [SerializeField] private Color m_incorrectoColor = Color.black;
     [SerializeField] private float m_waitTime = 0.0f;
 
+    [SerializeField] private Text contadorText = null;
+
     private BASEDEDATOS m_quizbase = null;
     private QUIZ_UI m_quizUI = null;
     private AudioSource m_audioSource = null;
 
     private int m_preguntasRespondidas = 0;
-    [SerializeField] private int m_totalPreguntas = 10;
+ private int m_totalPreguntas = 6;
 
     private int m_puntaje = 0;
 
@@ -27,6 +29,7 @@ public class GAMEMANAGER : MonoBehaviour
         m_quizUI = FindFirstObjectByType<QUIZ_UI>();
         m_audioSource = GetComponent<AudioSource>();
 
+        ActualizarContador();
         NextQuestion();
     }
 
@@ -49,7 +52,6 @@ public class GAMEMANAGER : MonoBehaviour
         boton.SetColor(boton.opcion.correct ? m_correctColor : m_incorrectoColor);
         m_audioSource.Play();
 
-        // 🎯 Aumenta o disminuye el puntaje según la respuesta
         if (boton.opcion.correct)
         {
             m_puntaje += 200;
@@ -58,13 +60,15 @@ public class GAMEMANAGER : MonoBehaviour
         else
         {
             m_puntaje -= 100;
-            if (m_puntaje < 0) m_puntaje = 0; // 🛡️ No dejes que baje de 0
+            if (m_puntaje < 0) m_puntaje = 0;
             Debug.Log("❌ Respuesta incorrecta. Puntaje actual: " + m_puntaje);
         }
 
         yield return new WaitForSeconds(m_waitTime);
 
         m_preguntasRespondidas++;
+        Debug.Log("Se aumento 1 punto en el contador");
+        ActualizarContador();
 
         if (m_preguntasRespondidas >= m_totalPreguntas)
         {
@@ -79,4 +83,19 @@ public class GAMEMANAGER : MonoBehaviour
 
         NextQuestion();
     }
+
+private void ActualizarContador()
+{
+    if (contadorText != null)
+    {
+        string texto = $"{m_preguntasRespondidas} / {m_totalPreguntas}";
+        contadorText.text = texto;
+        Debug.Log("Contador actualizado: " + texto);
+    }
+    else
+    {
+        Debug.LogWarning("contadorText NO está asignado.");
+    }
+}
+
 }
