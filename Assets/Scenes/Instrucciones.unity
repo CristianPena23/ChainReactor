@@ -313,7 +313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -338, y: 0}
+  m_AnchoredPosition: {x: -307, y: 16}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328696865
@@ -448,7 +448,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -48, y: -139}
+  m_AnchoredPosition: {x: -48, y: -172}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433048270
@@ -800,9 +800,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instrucciones:
   - {fileID: 21300000, guid: b6ef841452a510446ac6aa7691213576, type: 3}
-  - {fileID: 21300000, guid: 21631783497c4a04c9509a19bf3406e3, type: 3}
-  - {fileID: 21300000, guid: a4255d66756f8d044966f80a4d01c2b2, type: 3}
-  - {fileID: 21300000, guid: 9aa295b23a18b7e47bae4a664c80f037, type: 3}
+  - {fileID: 21300000, guid: c97f5fff087873a4aad1f529ec43366c, type: 3}
+  - {fileID: 21300000, guid: cd42e4d15fd38c543ae777efa9077df0, type: 3}
+  - {fileID: 21300000, guid: 6a7260aa7f767e14092182fcd215cbdc, type: 3}
+  - {fileID: 21300000, guid: 99276f0af2dfd4842ad79ff4f929e9c2, type: 3}
   contenidoInstruccion: {fileID: 1344596051}
   botonAnterior: {fileID: 328696865}
   botonSiguiente: {fileID: 1307706506}
@@ -924,7 +925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 233, y: -4}
+  m_AnchoredPosition: {x: 161, y: 12}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1307706506
@@ -1415,7 +1416,7 @@ RectTransform:
   m_GameObject: {fileID: 1749513514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.11639, y: 4.726527, z: 4.726527}
+  m_LocalScale: {x: 13.836186, y: 6.4644713, z: 6.4644713}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1344596053}
