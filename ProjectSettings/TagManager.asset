@@ -9,6 +9,11 @@ TagManager:
   - Hidrogeno2
   - Hidrogeno3
   - Hidrogeno4
+  - CARTA1
+  - CARTA2
+  - CARTA3
+  - CARTA4
+  - CARTA5
   layers:
   - Default
   - TransparentFX
