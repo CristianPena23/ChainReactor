@@ -3623,8 +3623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd2b2dcda1ff424db455873f76dacf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeGroup: {fileID: 1282806754}
-  fadeDuration: 1
+  disolverCanvasGroup: {fileID: 1282806754}
+  tiempoDisolverEntrada: 3
+  tiempoAntesDeDisolver: 2
+  tiempoDisolverSalida: 3
+  nombreEscenaSiguiente: PreguntasN1
 --- !u!4 &1159086227
 Transform:
   m_ObjectHideFlags: 0
