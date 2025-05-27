@@ -56,4 +56,10 @@ public class InstruccionesManager : MonoBehaviour
         // Cambia esto por el nombre real de la escena de tu juego
         SceneManager.LoadScene("Scenes/Niveles");
     }
+
+    public void Back()
+    {
+        SceneManager.LoadScene("Scenes/Inicio");
+        Debug.Log("Ir a Menu-Inicio");
+    }
 }
