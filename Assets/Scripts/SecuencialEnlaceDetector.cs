@@ -46,6 +46,7 @@ public class SecuencialEnlaceDetector : MonoBehaviour
                     if (angulo <= anguloPermitido)
                     {
                         Debug.Log("\u2705 Enlace correcto con " + c.name);
+                        TimerUI.monomerosCorrectos++;
 
                         // Instanciar cilindro
                         if (prefabCilindro)
@@ -57,7 +58,9 @@ public class SecuencialEnlaceDetector : MonoBehaviour
                             float dist = Vector3.Distance(paso.puntoDeEnlace.position, c.transform.position);
                             cilindro.transform.localScale = new Vector3(0.1f, dist / 2f, 0.1f);
                         }
-
+                        MonomeroInfo info = c.GetComponent<MonomeroInfo>();
+                        if (info != null) info.estaEnlazadoCorrectamente = true;
+                        
                         // Fijar y pasar al siguiente
                         c.transform.SetParent(paso.puntoDeEnlace);
                         c.transform.position = paso.puntoDeEnlace.position;
