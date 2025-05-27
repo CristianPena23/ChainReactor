@@ -4,37 +4,37 @@ using UnityEngine.SceneManagement;
 
 public class TransicionPreguntas : MonoBehaviour
 {
-    [Header("Panel negro con CanvasGroup")]
-    public CanvasGroup disolverCanvasGroup;
+    [Header("Referencias")]
+    public GameObject panelFinal;                // El canvas o panel final que debe mostrarse primero
+    public CanvasGroup faderCanvasGroup;         // El panel negro con CanvasGroup para el fade
+    public string nombreEscenaDestino = "preguntasN1";
 
-    [Header("Tiempos de transición")]
-    public float tiempoDisolverSalida = 1.5f;
+    [Header("Tiempos")]
+    public float tiempoEsperaDespuesDePanel = 2f;
+    public float tiempoFadeOut = 1.5f;
 
-    [Header("Nombre de la escena a cargar")]
-    public string nombreEscenaSiguiente = "preguntasN1";
+    private bool transicionIniciada = false;
 
-    // Llamar esta función desde un botón o trigger
-    public void IniciarTransicionAEscena()
+    void Update()
     {
-        // Asegúrate de que el panel esté visible y encima de todo
-        disolverCanvasGroup.alpha = 0f;
-        disolverCanvasGroup.blocksRaycasts = true;
-        disolverCanvasGroup.interactable = false;
-
-        // Activar el objeto por si estaba desactivado
-        disolverCanvasGroup.gameObject.SetActive(true);
-
-        // Empezar transición
-        StartCoroutine(TransicionAEscena());
+        if (!transicionIniciada && panelFinal.activeInHierarchy)
+        {
+            transicionIniciada = true;
+            StartCoroutine(FadeYTransicion());
+        }
     }
 
-    private IEnumerator TransicionAEscena()
+    private IEnumerator FadeYTransicion()
     {
-        // === FADE OUT === (de transparente a negro)
-        LeanTween.alphaCanvas(disolverCanvasGroup, 1f, tiempoDisolverSalida);
-        yield return new WaitForSeconds(tiempoDisolverSalida);
+        yield return new WaitForSeconds(tiempoEsperaDespuesDePanel);
 
-        // === Cargar escena ===
-        SceneManager.LoadScene(nombreEscenaSiguiente);
+        faderCanvasGroup.gameObject.SetActive(true);
+        faderCanvasGroup.alpha = 0f;
+
+        // Fade hacia negro
+        LeanTween.alphaCanvas(faderCanvasGroup, 1f, tiempoFadeOut);
+        yield return new WaitForSeconds(tiempoFadeOut);
+
+        SceneManager.LoadScene(nombreEscenaDestino);
     }
 }

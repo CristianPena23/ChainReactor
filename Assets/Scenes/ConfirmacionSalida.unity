@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sonidoAlClic: {fileID: 8300000, guid: ef220756e3e825e4680d5b27f00f341d, type: 3}
-  escenaDestino: Niveles
+  escenaDestino: 
 --- !u!1 &1866434616
 GameObject:
   m_ObjectHideFlags: 0

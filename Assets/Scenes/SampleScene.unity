@@ -3623,11 +3623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd2b2dcda1ff424db455873f76dacf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disolverCanvasGroup: {fileID: 1282806754}
-  tiempoDisolverEntrada: 3
-  tiempoAntesDeDisolver: 2
-  tiempoDisolverSalida: 3
-  nombreEscenaSiguiente: PreguntasN1
+  panelFinal: {fileID: 1286309916}
+  faderCanvasGroup: {fileID: 1282806754}
+  nombreEscenaDestino: preguntasN1
+  tiempoEsperaDespuesDePanel: 2
+  tiempoFadeOut: 1.5
 --- !u!4 &1159086227
 Transform:
   m_ObjectHideFlags: 0
@@ -3642,6 +3642,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 664747834}
+  - {fileID: 1566104861}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1160412776
@@ -4187,7 +4188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &1282806754
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5024,7 +5025,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1286309917}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1159086227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7073,7 +7074,6 @@ SceneRoots:
   - {fileID: 1439777838}
   - {fileID: 334445980}
   - {fileID: 327435671}
-  - {fileID: 1566104861}
   - {fileID: 1107033087}
   - {fileID: 779891872}
   - {fileID: 1965322164}
