@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowCardOnCollision : MonoBehaviour
+public class ShowCardOnCollisionWithImages : MonoBehaviour
 {
-    [Header("Prefab Canvas carta")]
-    public GameObject cardCanvasPrefab;  // Prefab que tiene Image, Button Next y Image+Button Close
+    [Header("Prefab Canvas Carta")]
+    public GameObject cardCanvasPrefab;  // Prefab del Canvas
 
     [Header("Imágenes de la carta")]
     public Sprite[] cardImages;
@@ -35,7 +35,7 @@ public class ShowCardOnCollision : MonoBehaviour
 
         cardInstance = Instantiate(cardCanvasPrefab);
 
-        // Busca el componente Image que mostrará las imágenes de la carta
+        // Busca el componente Image en el canvas para mostrar las imágenes
         cardImageComponent = cardInstance.GetComponentInChildren<Image>();
         if (cardImageComponent == null)
         {
@@ -43,52 +43,60 @@ public class ShowCardOnCollision : MonoBehaviour
             return;
         }
 
-        if (cardImages.Length == 0)
+        // Asignar la primera imagen
+        if (cardImages.Length > 0)
         {
-            Debug.LogWarning("No se asignaron imágenes para la carta.");
-            return;
+            currentImageIndex = 0;
+            cardImageComponent.sprite = cardImages[currentImageIndex];
+        }
+        else
+        {
+            Debug.LogWarning("No hay imágenes asignadas para la carta.");
         }
 
-        currentImageIndex = 0;
-        cardImageComponent.sprite = cardImages[currentImageIndex];
-
-        // Buscar botones por nombre: Next y Close (imagen con Button)
+        // Buscar botones en el prefab (Next y Close)
         Button[] buttons = cardInstance.GetComponentsInChildren<Button>();
-        foreach (Button btn in buttons)
+        foreach (var btn in buttons)
         {
-            string name = btn.gameObject.name.ToLower();
-            if (name.Contains("next"))
-            {
+            if (btn.name.ToLower().Contains("next"))
                 nextButton = btn;
-                nextButton.onClick.AddListener(ShowNextImage);
-            }
-            else if (name.Contains("close"))
-            {
+            else if (btn.name.ToLower().Contains("close"))
                 closeButton = btn;
-                closeButton.onClick.AddListener(CloseCard);
-            }
         }
+
+        // Asignar listeners a botones
+        if (nextButton != null)
+            nextButton.onClick.AddListener(ShowNextImage);
+
+        if (closeButton != null)
+            closeButton.onClick.AddListener(CloseCard);
 
         cardActive = true;
     }
 
     private void ShowNextImage()
     {
+        if (cardImages.Length == 0) return;
+
         currentImageIndex++;
+
         if (currentImageIndex >= cardImages.Length)
         {
-            if (nextButton != null)
-                nextButton.gameObject.SetActive(false);
+            // Opcional: cuando se acaban las imágenes, ocultar botón next o cerrar la carta
+            nextButton.gameObject.SetActive(false);
             return;
         }
+
         cardImageComponent.sprite = cardImages[currentImageIndex];
     }
 
     public void CloseCard()
     {
         if (cardInstance != null)
+        {
             Destroy(cardInstance);
+        }
 
-        Destroy(gameObject); // Destruye el plane para que no vuelva a aparecer
+        Destroy(gameObject);
     }
 }
